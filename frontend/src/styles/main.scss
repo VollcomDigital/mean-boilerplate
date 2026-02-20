@@ -1,0 +1,29 @@
+:root {
+  --color-bg: #0f0f14;
+  --color-bg-muted: #1a1a22;
+  --color-surface: #1e1e28;
+  --color-border: #2d2d3a;
+  --color-text: #e4e4e7;
+  --color-muted: #71717a;
+  --color-primary: #3b82f6;
+  --color-error: #ef4444;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}

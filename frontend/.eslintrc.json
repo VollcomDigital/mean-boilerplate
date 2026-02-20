@@ -1,0 +1,10 @@
+{
+  "extends": ["../.eslintrc.json", "plugin:@angular-eslint/recommended"],
+  "plugins": ["@angular-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "ecmaVersion": 2022,
+    "extraFileExtensions": [".html"]
+  }
+}
