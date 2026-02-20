@@ -1,0 +1,25 @@
+<div class="dashboard">
+  <h1>Dashboard</h1>
+
+  @if (user(); as currentUser) {
+    <div class="welcome-card">
+      <h2>Welcome back, {{ currentUser.firstName }}!</h2>
+      <p>Email: {{ currentUser.email }}</p>
+    </div>
+  }
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>API Status</h3>
+      <span class="stat-value status-ok">Connected</span>
+    </div>
+    <div class="stat-card">
+      <h3>Environment</h3>
+      <span class="stat-value">Development</span>
+    </div>
+    <div class="stat-card">
+      <h3>Stack</h3>
+      <span class="stat-value">MEAN + TypeScript</span>
+    </div>
+  </div>
+</div>

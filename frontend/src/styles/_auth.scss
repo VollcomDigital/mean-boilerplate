@@ -1,0 +1,28 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.auth-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+
+  h2 {
+    font-size: 1.75rem;
+    color: #1a1a2e;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
