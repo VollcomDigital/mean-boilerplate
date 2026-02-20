@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import type { SignOptions } from 'jsonwebtoken';
 import { z } from 'zod';
 
 dotenv.config({ quiet: true });
@@ -21,7 +22,16 @@ const envSchema = z.object({
   RATE_LIMIT_MAX: z.coerce.number().int().min(1).default(100),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
   JWT_SECRET: z.string().min(32).default(DEFAULT_DEV_JWT_SECRET),
-  JWT_EXPIRATION: z.string().min(2).default(DEFAULT_JWT_EXPIRATION),
+  JWT_EXPIRATION: z
+    .custom<SignOptions['expiresIn']>(
+      (value) =>
+        (typeof value === 'string' && value.trim().length > 0) ||
+        (typeof value === 'number' && Number.isFinite(value) && value > 0),
+      {
+        message: 'JWT_EXPIRATION must be a non-empty string or a positive number',
+      },
+    )
+    .default(DEFAULT_JWT_EXPIRATION),
 });
 
 export type Env = z.infer<typeof envSchema>;
