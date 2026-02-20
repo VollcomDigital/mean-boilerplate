@@ -15,6 +15,7 @@ import { AuthTokenService } from '../../core/services/auth-token.service';
 export class LoginComponent {
   readonly isSubmitting = signal<boolean>(false);
   readonly errorMessage = signal<string | null>(null);
+  private readonly formBuilder = inject(FormBuilder);
 
   readonly loginForm = this.formBuilder.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -24,7 +25,6 @@ export class LoginComponent {
   private readonly destroyRef = inject(DestroyRef);
 
   constructor(
-    private readonly formBuilder: FormBuilder,
     private readonly apiService: ApiService,
     private readonly authTokenService: AuthTokenService,
     private readonly router: Router,
