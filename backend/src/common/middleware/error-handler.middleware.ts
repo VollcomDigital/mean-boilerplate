@@ -56,9 +56,8 @@ export const errorHandlerMiddleware = (
   error: unknown,
   req: Request,
   res: Response<ApiErrorResponse>,
-  next: NextFunction,
+  _next: NextFunction,
 ): void => {
-  void next;
   const mappedError = mapError(error);
   const requestLogger = req.log ?? logger;
 
