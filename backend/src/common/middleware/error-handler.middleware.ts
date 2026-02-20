@@ -30,12 +30,18 @@ const mapError = (error: unknown): AppError => {
     });
   }
 
-  if (typeof error === 'object' && error !== null && 'code' in error && error.code === 11000) {
+  if (
+    error instanceof Error &&
+    error.name === 'MongoServerError' &&
+    (error as { code?: number }).code === 11000
+  ) {
+    const keyPattern = (error as { keyPattern?: Record<string, unknown> }).keyPattern;
+    const fields = keyPattern ? Object.keys(keyPattern) : [];
     return new AppError(
-      'Duplicate value violates unique constraint',
+      `Duplicate value for unique field(s): ${fields.join(', ')}`,
       409,
       'DUPLICATE_RESOURCE',
-      error,
+      { fields },
     );
   }
 
