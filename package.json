@@ -1,0 +1,41 @@
+{
+  "name": "mean-cloud-native-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloud-Native MEAN Stack Boilerplate with TypeScript, Docker, and 12-Factor App compliance",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down -v"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3"
+  },
+  "lint-staged": {
+    "backend/**/*.ts": [
+      "prettier --write"
+    ],
+    "frontend/**/*.ts": [
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
