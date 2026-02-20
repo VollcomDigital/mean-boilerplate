@@ -1,0 +1,44 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "es2022": true,
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/strict",
+    "plugin:@typescript-eslint/stylistic",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "*.config.js",
+    "*.config.cjs",
+    ".angular"
+  ],
+  "overrides": [
+    {
+      "files": ["frontend/**/*.ts", "frontend/**/*.html"],
+      "parserOptions": {
+        "project": "frontend/tsconfig.json"
+      }
+    },
+    {
+      "files": ["backend/**/*.ts"],
+      "parserOptions": {
+        "project": "backend/tsconfig.json"
+      }
+    }
+  ]
+}

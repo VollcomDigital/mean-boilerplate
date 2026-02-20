@@ -1,0 +1,13 @@
+node_modules
+dist
+build
+coverage
+.angular
+.env
+*.log
+.DS_Store
+*.tsbuildinfo
+out-tsc
+.idea
+.vscode
+*.local
