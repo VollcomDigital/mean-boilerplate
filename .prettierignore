@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+frontend/.angular
+frontend/dist
+backend/dist
+package-lock.json
+frontend/package-lock.json
+backend/package-lock.json

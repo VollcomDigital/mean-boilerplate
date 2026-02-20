@@ -1,0 +1,28 @@
+<section class="login-card">
+  <h1>Sign in</h1>
+  <p class="subtitle">Use your API credentials to receive an access token.</p>
+
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <label>
+      Email
+      <input type="email" formControlName="email" placeholder="jane@example.com" />
+    </label>
+
+    <label>
+      Password
+      <input type="password" formControlName="password" placeholder="••••••••" />
+    </label>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit" [disabled]="isSubmitting()">
+      @if (isSubmitting()) {
+        Signing in...
+      } @else {
+        Sign in
+      }
+    </button>
+  </form>
+</section>

@@ -1,0 +1,25 @@
+{
+  "name": "mean-cloud-native-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloud-native MEAN stack boilerplate with Angular and Express",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
+    "test": "npm run test --prefix backend && npm run test --prefix frontend",
+    "build": "npm run build --prefix backend && npm run build --prefix frontend",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint-staged": "lint-staged --concurrent false"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1"
+  }
+}

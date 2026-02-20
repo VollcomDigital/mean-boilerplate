@@ -1,0 +1,42 @@
+.app-header {
+  align-items: center;
+  background: #0f172a;
+  color: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+}
+
+.brand {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav {
+  align-items: center;
+  display: flex;
+  gap: 0.875rem;
+
+  a,
+  button {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    opacity: 0.9;
+    text-decoration: none;
+  }
+
+  .active {
+    font-weight: 700;
+    opacity: 1;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 56rem;
+  padding: 1.5rem 1rem 2rem;
+}
