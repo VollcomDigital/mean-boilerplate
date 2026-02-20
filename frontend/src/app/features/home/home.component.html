@@ -1,0 +1,24 @@
+<section class="card">
+  <h1>Cloud-Native MEAN Starter</h1>
+  <p class="subtitle">
+    This UI is using standalone components, lazy routes, Angular signals, and control-flow syntax.
+  </p>
+
+  <button type="button" class="action" (click)="refreshHealth()">Refresh backend liveness</button>
+
+  <div class="result">
+    @if (loading()) {
+      <app-loading-indicator message="Checking backend health..." />
+    } @else if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    } @else if (liveness(); as health) {
+      <div class="health-grid">
+        <div><strong>Status:</strong> {{ health.status }}</div>
+        <div><strong>Uptime (s):</strong> {{ health.uptimeSeconds }}</div>
+        <div><strong>Timestamp:</strong> {{ health.timestamp }}</div>
+      </div>
+    } @else {
+      <p class="muted">No health data available.</p>
+    }
+  </div>
+</section>
