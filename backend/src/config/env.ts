@@ -3,6 +3,9 @@ import { z } from 'zod';
 
 dotenv.config({ quiet: true });
 
+const DEFAULT_DEV_JWT_SECRET = 'dev-only-super-secret-key-with-32-characters';
+const DEFAULT_JWT_EXPIRATION = '1h';
+
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),
@@ -17,16 +20,33 @@ const envSchema = z.object({
   RATE_LIMIT_WINDOW_MS: z.coerce.number().int().min(1).default(900000),
   RATE_LIMIT_MAX: z.coerce.number().int().min(1).default(100),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
-  JWT_SECRET: z.string().min(32).default('dev-only-super-secret-key-with-32-characters'),
+  JWT_SECRET: z.string().min(32).default(DEFAULT_DEV_JWT_SECRET),
+  JWT_EXPIRATION: z.string().min(2).default(DEFAULT_JWT_EXPIRATION),
 });
 
-const parsedEnv = envSchema.safeParse(process.env);
+export type Env = z.infer<typeof envSchema>;
 
-if (!parsedEnv.success) {
-  const details = parsedEnv.error.issues
-    .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
-    .join('; ');
-  throw new Error(`Invalid environment configuration. ${details}`);
-}
+export const buildEnv = (rawEnv: NodeJS.ProcessEnv): Env => {
+  const parsedEnv = envSchema.safeParse(rawEnv);
 
-export const env = parsedEnv.data;
+  if (!parsedEnv.success) {
+    const details = parsedEnv.error.issues
+      .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
+      .join('; ');
+    throw new Error(`Invalid environment configuration. ${details}`);
+  }
+
+  const validatedEnv = parsedEnv.data;
+  const isProduction = validatedEnv.NODE_ENV === 'production';
+  const usesDefaultSecret = validatedEnv.JWT_SECRET === DEFAULT_DEV_JWT_SECRET;
+
+  if (isProduction && usesDefaultSecret) {
+    throw new Error(
+      'Invalid environment configuration. JWT_SECRET must be explicitly set in production.',
+    );
+  }
+
+  return validatedEnv;
+};
+
+export const env = buildEnv(process.env);

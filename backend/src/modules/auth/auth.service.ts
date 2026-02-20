@@ -5,8 +5,6 @@ import { env } from '../../config/env';
 import { UserModel } from '../users/user.model';
 import type { LoginInput } from './auth.validation';
 
-const ACCESS_TOKEN_EXPIRATION = '1h';
-
 export interface AuthUser {
   id: string;
   email: string;
@@ -34,7 +32,7 @@ export const login = async (payload: LoginInput): Promise<LoginResult> => {
   }
 
   const token = jwt.sign({ sub: user.id, email: user.email }, env.JWT_SECRET, {
-    expiresIn: ACCESS_TOKEN_EXPIRATION,
+    expiresIn: env.JWT_EXPIRATION,
   });
 
   return {

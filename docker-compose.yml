@@ -33,6 +33,7 @@ services:
       RATE_LIMIT_MAX: 100
       LOG_LEVEL: info
       JWT_SECRET: change-this-development-secret-at-least-32-chars
+      JWT_EXPIRATION: 1h
     depends_on:
       mongodb:
         condition: service_healthy
